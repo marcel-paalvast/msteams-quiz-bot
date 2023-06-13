@@ -10,10 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.TeamsFx.Conversation;
 using MsTeamsQuizBot.Actions;
-using MsTeamsQuizBot.CardActions;
 using MsTeamsQuizBot.Cards;
 using MsTeamsQuizBot.Commands;
 using MsTeamsQuizBot.Services;
+using MsTeamsQuizBot.Services.Cosmos;
 using MsTeamsQuizBot.Services.Local;
 using System;
 using System.Collections.Generic;
@@ -59,7 +59,6 @@ public class Startup : FunctionsStartup
                 {
                     Actions = new IAdaptiveCardActionHandler[] 
                     { 
-                        new InitAction(),
                         new QuizAction(questionService, stateService),
                         new ForwardInstigatorAction(),
                         new AnswerAction(stateService),
@@ -76,8 +75,13 @@ public class Startup : FunctionsStartup
         // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
         builder.Services.AddTransient<IBot, TeamsActivityHandler>();
 
+        builder.Services.AddOptions<CosmosSettings>().Configure<IConfiguration>((settings, config) =>
+        {
+            config.GetSection("Cosmos").Bind(settings);
+        });
+
         builder.Services.AddSingleton<IQuestionService, ExampleQuestionService>();
-        builder.Services.AddSingleton<ExampleStateService>();
-        builder.Services.AddSingleton<IStateService>(sp => new MemoryCacheStateService<ExampleStateService>(sp.GetService<ExampleStateService>()));
+        builder.Services.AddSingleton<CosmosStateService>();
+        builder.Services.AddSingleton<IStateService>(sp => new MemoryCacheStateService<CosmosStateService>(sp.GetService<CosmosStateService>()));
     }
 }
