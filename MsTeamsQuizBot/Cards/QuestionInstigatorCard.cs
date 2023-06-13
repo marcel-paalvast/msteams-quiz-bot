@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MsTeamsQuizBot.Cards;
-internal class QuestionInstigatorCard : Card<Question>
+internal class QuestionInstigatorCard : Card<NextQuestion>
 {
     public override string Template => """
         {

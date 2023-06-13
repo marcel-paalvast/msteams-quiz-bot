@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MsTeamsQuizBot.Services;
+namespace MsTeamsQuizBot.Services.Local;
 internal class ExampleStateService : IStateService
 {
-    public Task<Question> GetQuestionAsync(string questionId)
+    public Task<Question> GetQuestionAsync(string quizId, string questionId)
     {
         throw new NotImplementedException();
     }
@@ -54,7 +54,7 @@ internal class ExampleStateService : IStateService
         });
     }
 
-    public Task<Question> LockQuestionAsync(string questionId)
+    public Task<Question> LockQuestionAsync(string quizId, string questionId)
     {
         return Task.FromResult(new Question()
         {

@@ -36,7 +36,7 @@ internal class QuizAction : IAdaptiveCardActionHandler
 
         var quiz = new Quiz()
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Guid.NewGuid().ToString(),      
             Topic = data.Topic,
             Language = data.Language,
             ApiKey = data.Key,
@@ -46,7 +46,7 @@ internal class QuizAction : IAdaptiveCardActionHandler
         {
             _stateService.SaveQuizAsync(quiz)
         };
-        var question = await _questionService.CreateQuestionAsync(quiz.Topic, quiz.Language);
+        var question = await _questionService.CreateQuestionAsync(quiz.Id, quiz.Topic, quiz.Language);
         tasks.Add(_stateService.SaveQuestionAsync(question));
 
         var response = new QuestionCard().CreateResponse(new()

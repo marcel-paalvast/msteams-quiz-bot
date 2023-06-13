@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MsTeamsQuizBot.Cards;
-public class ActionRegisteredCard : Card<Registered>
+public class StatusCard : Card<Status>
 {
     public override string Template => """
         {
@@ -15,7 +15,7 @@ public class ActionRegisteredCard : Card<Registered>
             "body": [
                 {
                     "type": "TextBlock",
-                    "text": "Your action has been registered",
+                    "text": "${text}",
                     "wrap": true,
                     "size": "Medium",
                     "horizontalAlignment": "Center"
@@ -25,5 +25,7 @@ public class ActionRegisteredCard : Card<Registered>
         """;
 }
 
-public class Registered
-{ }
+public class Status
+{ 
+    public string Text { get; set; }
+}

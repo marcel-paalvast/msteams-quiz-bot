@@ -14,6 +14,7 @@ using MsTeamsQuizBot.CardActions;
 using MsTeamsQuizBot.Cards;
 using MsTeamsQuizBot.Commands;
 using MsTeamsQuizBot.Services;
+using MsTeamsQuizBot.Services.Local;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,8 +52,6 @@ public class Startup : FunctionsStartup
                 {
                     Commands = new ITeamsCommandHandler[] 
                     { 
-                        new HelloCommand(),
-                        new CardCommand(),
                         new StartCommand(),
                     },
                 },
@@ -69,10 +68,6 @@ public class Startup : FunctionsStartup
                         new StopAction(stateService),
                     },
                 },
-                //Notification = new NotificationOptions
-                //{
-                //    BotAppId = configuration["MicrosoftAppId"],
-                //},
             };
 
             return new ConversationBot(options);

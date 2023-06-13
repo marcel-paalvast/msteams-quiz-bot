@@ -27,7 +27,7 @@ internal class MemoryCacheStateService<T> : IStateService where T : IStateServic
         };
     }
 
-    public async Task<Question> GetQuestionAsync(string questionId)
+    public async Task<Question> GetQuestionAsync(string quizId, string questionId)
     {
         if (_cache.TryGetValue(questionId, out var result) && result is Question cachedQuestion)
         {
@@ -35,7 +35,7 @@ internal class MemoryCacheStateService<T> : IStateService where T : IStateServic
         }
         else
         {
-            var question = await _service.GetQuestionAsync(questionId);
+            var question = await _service.GetQuestionAsync(quizId, questionId);
             _cache.Set(questionId, question, _options);
             return question;
         }
@@ -60,9 +60,9 @@ internal class MemoryCacheStateService<T> : IStateService where T : IStateServic
         return await _service.GetQuizResultsAsync(quizId);
     }
 
-    public async Task<Question> LockQuestionAsync(string questionId)
+    public async Task<Question> LockQuestionAsync(string quizId, string questionId)
     {
-        var lockTask = _service.LockQuestionAsync(questionId);
+        var lockTask = _service.LockQuestionAsync(quizId, questionId);
         if (_cache.TryGetValue(questionId, out var result) && result is Question cachedQuestion)
         {
             cachedQuestion.Locked = true;
