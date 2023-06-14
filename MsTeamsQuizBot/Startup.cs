@@ -14,7 +14,8 @@ using MsTeamsQuizBot.Cards;
 using MsTeamsQuizBot.Commands;
 using MsTeamsQuizBot.Services;
 using MsTeamsQuizBot.Services.Cosmos;
-using MsTeamsQuizBot.Services.Local;
+using MsTeamsQuizBot.Services.OpenAi;
+using OpenAI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,9 +80,14 @@ public class Startup : FunctionsStartup
         {
             config.GetSection("Cosmos").Bind(settings);
         });
-
-        builder.Services.AddSingleton<IQuestionService, ExampleQuestionService>();
         builder.Services.AddSingleton<CosmosStateService>();
         builder.Services.AddSingleton<IStateService>(sp => new MemoryCacheStateService<CosmosStateService>(sp.GetService<CosmosStateService>()));
+
+        builder.Services.AddOptions<OpenAiOptions>().Configure<IConfiguration>((settings, config) =>
+        {
+            config.GetSection("OpenAi").Bind(settings);
+        });
+        builder.Services.AddHttpClient();
+        builder.Services.AddSingleton<IQuestionService, OpenAiQuestionService>();
     }
 }

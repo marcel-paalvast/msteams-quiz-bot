@@ -31,8 +31,6 @@ internal class QuizAction : IAdaptiveCardActionHandler
     public async Task<InvokeResponse> HandleActionInvokedAsync(ITurnContext turnContext, object cardData, CancellationToken cancellationToken = default)
     {
         var data = ((JObject)cardData).ToObject<CardData>();
-        //change later
-        data.Topic = "Example";
 
         var quiz = new Quiz()
         {
