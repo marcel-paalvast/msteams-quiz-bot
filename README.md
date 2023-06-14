@@ -8,7 +8,7 @@ A Microsoft Teams bot to create a quiz inside any chat about any subject using r
 
 When mentioned with `@bot-name quiz` the bot will create an adaptive card allowing a user to setup a quiz about their specified topic and in their language. The user starting the quiz then has full control to participate and decide when to lock a question and generate the next question or to stop the quiz and show the top 10 results.
 
-A Function App handles the messages that are received by the bot reacting to the prompts and generating responses using [Microsoft's Adapative Cards](https://adaptivecards.io/). The Function App uses a Cosmos Database to maintain its state allowing it to scale and not require it to be always on (so serverless is an option). A memory cache is maintained to quickly access objects should the Function App still be active from previous requests. Questions are generated using OpenAi's ChatGpt allowing you to 
+A Function App handles the messages that are received by the bot reacting to the prompts and generating responses using [Microsoft's Adapative Cards](https://adaptivecards.io/). The Function App uses a Cosmos Database to maintain its state allowing it to scale and not require it to be always on (so serverless is an option). A memory cache is maintained to quickly access objects should the Function App still be active from previous requests. Questions are generated using OpenAi's ChatGpt allowing you to create an 'infinite' amount of questions on any topic without effort.
 
 ## How to setup your own environment:
 
