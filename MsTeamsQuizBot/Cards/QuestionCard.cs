@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MsTeamsQuizBot.Cards;
-internal class QuestionCard : Card<Question>
+internal class QuestionCard : Card<NextQuestion>
 {
     public override string Template => """
         {
@@ -193,7 +193,7 @@ internal class QuestionCard : Card<Question>
         """;
 }
 
-public class Question
+public class NextQuestion
 {
     public string Title { get; set; }
     public string Description { get; set; }

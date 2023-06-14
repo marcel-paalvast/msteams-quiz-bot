@@ -5,24 +5,6 @@ using Microsoft.TeamsFx.Conversation;
 using Newtonsoft.Json;
 
 namespace MsTeamsQuizBot.Cards;
-
-//public static class Template<T> where T : ITemplate<T>
-//{
-//    public static IMessageActivity CreateActivity(T input)
-//    {
-//        var cardContent = new AdaptiveCardTemplate(input.Template).Expand(input.Data);
-
-//        return MessageFactory.Attachment
-//        (
-//            new Attachment
-//            {
-//                ContentType = "application/vnd.microsoft.card.adaptive",
-//                Content = JsonConvert.DeserializeObject(cardContent),
-//            }
-//        );
-//    }
-//}
-
 public abstract class Card<T>
 {
     public abstract string Template { get; }

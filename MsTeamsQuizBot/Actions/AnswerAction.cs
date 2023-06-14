@@ -30,18 +30,38 @@ public class AnswerAction : IAdaptiveCardActionHandler
     {
         var data = ((JObject)cardData).ToObject<CardData>();
 
-        await _stateService.SaveAnswerAsync(new Models.Answer()
-        {
-            Id = Guid.NewGuid().ToString(),
-            QuizId = data.QuizId,
-            QuestionId = data.QuestionId,
-            UserAnswer = data.Answer,
-            UserId = turnContext.Activity.From.Id,
-            UserName = turnContext.Activity.From.Name,
-        });
+       var question = await _stateService.GetQuestionAsync(data.QuizId, data.QuestionId);
 
-        var response = new AnsweredCard().CreateResponse(new());
-        return response;
+        if (question is null)
+        {
+            return new StatusCard().CreateResponse(new()
+            {
+                Text = "Oops! Something went wrong"
+            });
+        }
+        else if (question.Locked)
+        {
+            return new StatusCard().CreateResponse(new()
+            {
+                Text = "You submitted your answer too late 😥"
+            });
+        }
+        else
+        {
+            await _stateService.SaveAnswerAsync(new Models.Answer()
+            {
+                Id = Guid.NewGuid().ToString(),
+                QuizId = data.QuizId,
+                QuestionId = data.QuestionId,
+                UserAnswer = data.Answer,
+                UserId = turnContext.Activity.From.Id,
+                UserName = turnContext.Activity.From.Name,
+            });
+            return new StatusCard().CreateResponse(new()
+            {
+                Text = "Your answer has been submitted!"
+            });
+        }
     }
 
     private class CardData

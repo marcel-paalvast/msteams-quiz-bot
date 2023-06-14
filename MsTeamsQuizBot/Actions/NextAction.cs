@@ -32,9 +32,9 @@ public class NextAction : IAdaptiveCardActionHandler
     {
         var data = ((JObject)cardData).ToObject<CardData>();
 
-        var previousQuestionTask = _stateService.LockQuestionAsync(data.QuestionId);
+        var previousQuestionTask = _stateService.LockQuestionAsync(data.QuizId, data.QuestionId);
         var quiz = await _stateService.GetQuizAsync(data.QuizId);
-        var nextQuestion = await _questionService.CreateQuestionAsync(quiz.Topic, quiz.Language);
+        var nextQuestion = await _questionService.CreateQuestionAsync(data.QuizId, quiz.Topic, quiz.Language);
         var setQuestionTask =_stateService.SaveQuestionAsync(nextQuestion);
 
         var previousQuestion = await previousQuestionTask;
@@ -57,7 +57,10 @@ public class NextAction : IAdaptiveCardActionHandler
         await turnContext.SendActivityAsync(activity, cancellationToken);
         await setQuestionTask;
 
-        var response = new ActionRegisteredCard().CreateResponse(new());
+        var response = new StatusCard().CreateResponse(new()
+        {
+            Text = "Your action has been registered"
+        });
         return response;
     }
 

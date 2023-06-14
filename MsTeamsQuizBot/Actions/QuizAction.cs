@@ -20,7 +20,7 @@ internal class QuizAction : IAdaptiveCardActionHandler
 
     public string TriggerVerb => Verb;
 
-    public AdaptiveCardResponse AdaptiveCardResponse => AdaptiveCardResponse.ReplaceForInteractor;
+    public AdaptiveCardResponse AdaptiveCardResponse => AdaptiveCardResponse.ReplaceForAll;
 
     public QuizAction(IQuestionService questionService, IStateService stateService)
     {
@@ -31,22 +31,19 @@ internal class QuizAction : IAdaptiveCardActionHandler
     public async Task<InvokeResponse> HandleActionInvokedAsync(ITurnContext turnContext, object cardData, CancellationToken cancellationToken = default)
     {
         var data = ((JObject)cardData).ToObject<CardData>();
-        //change later
-        data.Topic = "Example";
 
         var quiz = new Quiz()
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = Guid.NewGuid().ToString(),      
             Topic = data.Topic,
             Language = data.Language,
-            ApiKey = data.Key,
         };
 
         var tasks = new List<Task>
         {
             _stateService.SaveQuizAsync(quiz)
         };
-        var question = await _questionService.CreateQuestionAsync(quiz.Topic, quiz.Language);
+        var question = await _questionService.CreateQuestionAsync(quiz.Id, quiz.Topic, quiz.Language);
         tasks.Add(_stateService.SaveQuestionAsync(question));
 
         var response = new QuestionCard().CreateResponse(new()
@@ -65,7 +62,6 @@ internal class QuizAction : IAdaptiveCardActionHandler
 
     private class CardData
     {
-        public string Key { get; set; }
         public string Topic { get; set; }
         public string Language { get; set; }
     }

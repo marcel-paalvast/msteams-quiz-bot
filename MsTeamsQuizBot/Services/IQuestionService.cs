@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 namespace MsTeamsQuizBot.Services;
 public interface IQuestionService
 {
-    public Task<Question> CreateQuestionAsync(string topic, string language);
+    public Task<Question> CreateQuestionAsync(string quizId, string topic, string language);
 }

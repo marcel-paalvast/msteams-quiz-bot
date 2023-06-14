@@ -31,7 +31,7 @@ public class StopAction : IAdaptiveCardActionHandler
     {
         var data = ((JObject)cardData).ToObject<CardData>();
 
-        var previousQuestionTask = _stateService.LockQuestionAsync(data.QuestionId);
+        var previousQuestionTask = _stateService.LockQuestionAsync(data.QuizId, data.QuestionId);
         var results = await _stateService.GetQuizResultsAsync(data.QuizId);
 
         var activity = new RankingCard().CreateActivity(new()
@@ -45,7 +45,10 @@ public class StopAction : IAdaptiveCardActionHandler
         await turnContext.SendActivityAsync(activity, cancellationToken);
         await previousQuestionTask;
 
-        var response = new ActionRegisteredCard().CreateResponse(new());
+        var response = new StatusCard().CreateResponse(new()
+        {
+            Text = "Your action has been registered"
+        });
         return response;
     }
 
