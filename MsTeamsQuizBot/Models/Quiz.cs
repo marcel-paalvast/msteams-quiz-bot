@@ -14,6 +14,4 @@ public class Quiz
     public string Language { get; set; }
     [JsonProperty("topic")]
     public string Topic { get; set; }
-    [JsonProperty("apiKey")]
-    public string ApiKey { get; set; }
 }

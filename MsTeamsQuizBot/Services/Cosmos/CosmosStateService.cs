@@ -155,7 +155,6 @@ internal class CosmosStateService : IStateService
         var cosmosQuiz = new CosmosQuiz()
         {
             Id = quiz.Id,
-            ApiKey = quiz.ApiKey,
             Language = quiz.Language,
             Topic = quiz.Topic,
         };

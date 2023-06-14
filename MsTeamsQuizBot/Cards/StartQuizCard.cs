@@ -23,21 +23,6 @@ public class StartQuizCard : Card<StartQuiz>
                 },
                 {
                     "type": "Input.Text",
-                    "style": "Password",
-                    "id": "key",
-                    "label": "Api key",
-                    "isRequired": true,
-                    "errorMessage": "Api key is required",
-                    "inlineAction": {
-                        "type": "Action.OpenUrl",
-                        "id": "open-key-page",
-                        "title": "Obtain key",
-                        "tooltip": "Go to openai.com key page",
-                        "url": "https://platform.openai.com/account/api-keys"
-                    }
-                },
-                {
-                    "type": "Input.Text",
                     "id": "topic",
                     "label": "Select a topic",
                     "isRequired": true,
@@ -62,7 +47,4 @@ public class StartQuizCard : Card<StartQuiz>
         """;
 }
 
-public class StartQuiz
-{
-
-}
+public class StartQuiz { }

@@ -39,7 +39,6 @@ internal class QuizAction : IAdaptiveCardActionHandler
             Id = Guid.NewGuid().ToString(),      
             Topic = data.Topic,
             Language = data.Language,
-            ApiKey = data.Key,
         };
 
         var tasks = new List<Task>
@@ -65,7 +64,6 @@ internal class QuizAction : IAdaptiveCardActionHandler
 
     private class CardData
     {
-        public string Key { get; set; }
         public string Topic { get; set; }
         public string Language { get; set; }
     }
