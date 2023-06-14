@@ -20,7 +20,7 @@ internal class QuizAction : IAdaptiveCardActionHandler
 
     public string TriggerVerb => Verb;
 
-    public AdaptiveCardResponse AdaptiveCardResponse => AdaptiveCardResponse.ReplaceForInteractor;
+    public AdaptiveCardResponse AdaptiveCardResponse => AdaptiveCardResponse.ReplaceForAll;
 
     public QuizAction(IQuestionService questionService, IStateService stateService)
     {
