@@ -68,12 +68,8 @@ internal class MemoryCacheStateService<T> : IStateService where T : IStateServic
         if (_cache.TryGetValue(questionId, out var result) && result is Question cachedQuestion)
         {
             cachedQuestion.Locked = true;
-            return cachedQuestion;
         }
-        else
-        {
-            return await lockTask;
-        }
+        return await lockTask;
     }
 
     public async Task SaveAnswerAsync(Answer answer)
