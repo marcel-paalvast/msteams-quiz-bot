@@ -24,7 +24,7 @@ public class OpenAiQuestionService : IQuestionService
     public async Task<Question> CreateQuestionAsync(string quizId, string topic, string language)
     {
         var question = $"""
-             Ask a very difficult multiple choice question about the topic '{topic}'{(string.IsNullOrEmpty(language) ? "" : " using 'Dutch' as language")}.
+            Ask a multiple choice question about the topic '{topic}'{(string.IsNullOrEmpty(language) ? "" : $" using '{language}' as language")}.
             Use the following format ONLY:
             [question]
 
