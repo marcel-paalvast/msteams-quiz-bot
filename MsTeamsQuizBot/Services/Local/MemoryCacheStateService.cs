@@ -18,7 +18,9 @@ internal class MemoryCacheStateService<T> : IStateService where T : IStateServic
         _service = service;
         _cache = new MemoryCache(new MemoryCacheOptions()
         {
+            CompactionPercentage = 0.25,
             ExpirationScanFrequency = TimeSpan.FromMinutes(1),
+            SizeLimit = 10_000,
         });
         _options = new MemoryCacheEntryOptions()
         {

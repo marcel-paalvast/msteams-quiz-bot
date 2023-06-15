@@ -14,6 +14,7 @@ using MsTeamsQuizBot.Cards;
 using MsTeamsQuizBot.Commands;
 using MsTeamsQuizBot.Services;
 using MsTeamsQuizBot.Services.Cosmos;
+using MsTeamsQuizBot.Services.Local;
 using MsTeamsQuizBot.Services.OpenAi;
 using OpenAI;
 using System;
