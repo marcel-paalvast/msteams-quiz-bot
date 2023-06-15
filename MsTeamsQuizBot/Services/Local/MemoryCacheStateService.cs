@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MsTeamsQuizBot.Services;
+namespace MsTeamsQuizBot.Services.Local;
 internal class MemoryCacheStateService<T> : IStateService where T : IStateService
 {
     private readonly IStateService _service;
