@@ -10,6 +10,8 @@ When mentioned with `@bot-name quiz` the bot will create an adaptive card allowi
 
 A Function App handles the messages that are received by the bot reacting to the prompts and generating responses using [Microsoft's Adapative Cards](https://adaptivecards.io/). The Function App uses a Cosmos Database to maintain its state allowing it to scale and not require it to be always on (so serverless is an option). A memory cache is maintained to quickly access objects should the Function App still be active from previous requests. Questions are generated using OpenAi's ChatGpt allowing you to create an 'infinite' amount of questions on any topic without effort.
 
+https://user-images.githubusercontent.com/126659601/246180922-01173cba-c3f4-4846-b722-6e1aa31cc17c.mp4
+
 ## How to setup your own environment:
 
 ### Required Resources
